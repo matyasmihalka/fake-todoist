@@ -1,7 +1,15 @@
+import { useState } from 'react'
 import './App.css'
-import { ToDoList } from './components/ToDoList'
+import { ToDoList } from '@/components/ToDoList'
+import { Dialog } from '@/components/Dialog'
 
 function App() {
+  const [isOpen, setIsOpen] = useState(false)
+
+  const closeModal = () => {
+    setIsOpen(false)
+  }
+
   return (
     <>
       <div className="flex h-screen bg-gray-100">
@@ -14,9 +22,11 @@ function App() {
           <button
             type="button"
             className="text-white bg-rose-500 hover:bg-rose-600 focus:outline-none focus:ring-4 focus:ring-rose-700 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2"
+            onClick={() => setIsOpen(true)}
           >
             + Add task
           </button>
+          <Dialog open={isOpen} onClose={closeModal} />
         </aside>
 
         {/* Main content */}
