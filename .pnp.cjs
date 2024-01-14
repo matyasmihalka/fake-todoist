@@ -27,6 +27,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["@headlessui/react", "virtual:6b1dae99cf8932be14d19f01d1e48d9a4d3b9f68a6c37a9e9e122b407577003edda3f39102af665371b012b4b524b5ec138c3807cf256f440ec64f9055ff0c2d#npm:1.7.18"],\
+          ["@hookform/resolvers", "virtual:6b1dae99cf8932be14d19f01d1e48d9a4d3b9f68a6c37a9e9e122b407577003edda3f39102af665371b012b4b524b5ec138c3807cf256f440ec64f9055ff0c2d#npm:3.3.4"],\
           ["@types/node", "npm:20.11.0"],\
           ["@types/react", "npm:18.2.47"],\
           ["@types/react-dom", "npm:18.2.18"],\
@@ -691,6 +692,28 @@ const RAW_RUNTIME_STATE =
           "@types/react",\
           "react-dom",\
           "react"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@hookform/resolvers", [\
+      ["npm:3.3.4", {\
+        "packageLocation": "../../../../.yarn/berry/cache/@hookform-resolvers-npm-3.3.4-948251d894-10c0.zip/node_modules/@hookform/resolvers/",\
+        "packageDependencies": [\
+          ["@hookform/resolvers", "npm:3.3.4"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:6b1dae99cf8932be14d19f01d1e48d9a4d3b9f68a6c37a9e9e122b407577003edda3f39102af665371b012b4b524b5ec138c3807cf256f440ec64f9055ff0c2d#npm:3.3.4", {\
+        "packageLocation": "./.yarn/__virtual__/@hookform-resolvers-virtual-05e8433a94/5/.yarn/berry/cache/@hookform-resolvers-npm-3.3.4-948251d894-10c0.zip/node_modules/@hookform/resolvers/",\
+        "packageDependencies": [\
+          ["@hookform/resolvers", "virtual:6b1dae99cf8932be14d19f01d1e48d9a4d3b9f68a6c37a9e9e122b407577003edda3f39102af665371b012b4b524b5ec138c3807cf256f440ec64f9055ff0c2d#npm:3.3.4"],\
+          ["@types/react-hook-form", null],\
+          ["react-hook-form", "virtual:6b1dae99cf8932be14d19f01d1e48d9a4d3b9f68a6c37a9e9e122b407577003edda3f39102af665371b012b4b524b5ec138c3807cf256f440ec64f9055ff0c2d#npm:7.49.3"]\
+        ],\
+        "packagePeers": [\
+          "@types/react-hook-form",\
+          "react-hook-form"\
         ],\
         "linkType": "HARD"\
       }]\
@@ -2926,6 +2949,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["medior-todo-app", "workspace:."],\
           ["@headlessui/react", "virtual:6b1dae99cf8932be14d19f01d1e48d9a4d3b9f68a6c37a9e9e122b407577003edda3f39102af665371b012b4b524b5ec138c3807cf256f440ec64f9055ff0c2d#npm:1.7.18"],\
+          ["@hookform/resolvers", "virtual:6b1dae99cf8932be14d19f01d1e48d9a4d3b9f68a6c37a9e9e122b407577003edda3f39102af665371b012b4b524b5ec138c3807cf256f440ec64f9055ff0c2d#npm:3.3.4"],\
           ["@types/node", "npm:20.11.0"],\
           ["@types/react", "npm:18.2.47"],\
           ["@types/react-dom", "npm:18.2.18"],\

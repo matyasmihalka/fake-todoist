@@ -1,6 +1,10 @@
 import { Dialog as HDialog, Transition } from '@headlessui/react'
-import { Fragment } from 'react'
+import { Fragment, useEffect } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+import { useToDoStore } from '@/store/store'
+import { v4 as uuidv4 } from 'uuid'
 
 type Inputs = {
   title: string
@@ -12,28 +16,42 @@ type Props = {
   onClose: () => void
 }
 
+const schema = z.object({
+  title: z
+    .string()
+    .min(3, 'Title is required and must be at least 3 characters long'),
+  description: z.string(),
+})
+
 export const Dialog = ({ open, onClose }: Props) => {
-  // const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault()
-  //   console.log('submit')
-  // }
+  const addTodo = useToDoStore((state) => state.addToDo)
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<Inputs>()
+  } = useForm<Inputs>({ resolver: zodResolver(schema) })
+
+  useEffect(() => {
+    if (open) {
+      reset()
+    }
+  }, [open])
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log('submitting from, ', data)
+    addTodo({
+      id: uuidv4(),
+      title: data.title,
+      description: data.description,
+      date: new Date().toLocaleDateString(),
+      checked: false,
+    })
     onClose()
-    reset()
   }
 
   const closeDialog = () => {
     onClose()
-    reset()
   }
 
   return (
@@ -74,7 +92,7 @@ export const Dialog = ({ open, onClose }: Props) => {
                     type="text"
                     placeholder="Task"
                     className="text-lg font-medium leading-6 text-gray-900 appearance-none block w-full bg-white border border-gray-300 rounded-md py-2 px-3 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-rose-500 focus:border-rose-500"
-                    {...register('title', { required: true })}
+                    {...register('title')}
                   />
                   {errors.title && (
                     <ErrorMessage message={errors.title.message} />
@@ -85,7 +103,7 @@ export const Dialog = ({ open, onClose }: Props) => {
                       placeholder="Description"
                       className="text-sm text-gray-500 appearance-none block w-full bg-white border border-gray-300 rounded-md py-2 px-3 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-rose-500 focus:border-rose-500"
                       rows={2}
-                      {...register('description', { required: true })}
+                      {...register('description')}
                     />
                     {errors.description && (
                       <ErrorMessage message={errors.description.message} />
@@ -104,7 +122,7 @@ export const Dialog = ({ open, onClose }: Props) => {
                       type="submit"
                       className="inline-flex justify-center rounded-md border border-transparent bg-rose-100 px-4 py-2 text-sm font-medium text-rose-900 hover:bg-rose-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2"
                     >
-                      Got it, thanks!
+                      Add task
                     </button>
                   </div>
                 </form>
@@ -118,5 +136,5 @@ export const Dialog = ({ open, onClose }: Props) => {
 }
 
 const ErrorMessage = ({ message }: { message: string | undefined }) => {
-  return <div className="text-sm text-red-600">There is an error {message}</div>
+  return <div className="text-sm text-red-600">{message}</div>
 }

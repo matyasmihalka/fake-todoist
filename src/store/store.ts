@@ -42,7 +42,13 @@ const initialState: State = {
 
 export const useToDoStore = create<State & Action>((set) => ({
   ...initialState,
-  addToDo: (toDo) => set((state) => ({ toDoList: [...state.toDoList, toDo] })),
+  // addToDo: (toDo) => set((state) => ({ toDoList: [...state.toDoList, toDo] })),
+  addToDo: (toDo) =>
+    set(
+      produce<State>((state) => {
+        state.toDoList.push(toDo)
+      }),
+    ),
   checkToDo: (id: string) =>
     set(
       produce<State>((state) => {

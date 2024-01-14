@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import { ToDoList } from '@/components/ToDoList'
 import { Dialog } from '@/components/Dialog'
+import { Logo } from './components/Logo'
 
 function App() {
   const [isOpen, setIsOpen] = useState(false)
@@ -15,10 +16,13 @@ function App() {
       <div className="flex h-screen bg-gray-100">
         {/* Sidebar */}
         <aside className="w-64 bg-rose-100 text-black p-4 space-y-2">
+          <div className="text-xl font-bold leading-6 text-gray-900 flex items-center mb-5">
+            <div className="w-9 h-9 ">
+              <Logo />
+            </div>
+            Weekly
+          </div>
           {/* Sidebar content here */}
-          <SidebarLink href="#" title="Link 1" />
-          <SidebarLink href="#" title="Link 2" />
-          <SidebarLink href="#" title="Link 3" />
           <button
             type="button"
             className="text-white bg-rose-500 hover:bg-rose-600 focus:outline-none focus:ring-4 focus:ring-rose-700 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2"
@@ -43,14 +47,6 @@ function App() {
         </section>
       </div>
     </>
-  )
-}
-
-function SidebarLink({ href, title }) {
-  return (
-    <a href={href} className="block py-2.5 px-4 rounded hover:bg-blue-700">
-      {title}
-    </a>
   )
 }
 
