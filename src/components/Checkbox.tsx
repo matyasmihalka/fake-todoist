@@ -1,6 +1,6 @@
 interface CheckboxProps {
   checked: boolean
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+  onChange: () => void
 }
 
 // https://www.material-tailwind.com/docs/html/checkbox
