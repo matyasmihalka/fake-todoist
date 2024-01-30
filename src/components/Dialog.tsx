@@ -9,6 +9,7 @@ import { v4 as uuidv4 } from 'uuid'
 type Inputs = {
   title: string
   description: string
+  date: string
 }
 
 type Props = {
@@ -21,6 +22,7 @@ const schema = z.object({
     .string()
     .min(3, 'Title is required and must be at least 3 characters long'),
   description: z.string(),
+  date: z.string(),
 })
 
 export const Dialog = ({ open, onClose }: Props) => {
@@ -40,11 +42,12 @@ export const Dialog = ({ open, onClose }: Props) => {
   }, [open])
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
+    console.log('data: ', data)
     addTodo({
       id: uuidv4(),
       title: data.title,
       description: data.description,
-      date: new Date().toLocaleDateString(),
+      date: data.date,
       checked: false,
     })
     onClose()
@@ -52,6 +55,25 @@ export const Dialog = ({ open, onClose }: Props) => {
 
   const closeDialog = () => {
     onClose()
+  }
+
+  const getFormattedToday = () => {
+    const today = new Date()
+    const year = today.getFullYear()
+    const month = today.getMonth() + 1 // getMonth() returns month from 0-11
+    const day = today.getDate()
+    const hours = today.getHours()
+    const minutes = today.getMinutes()
+
+    // Ensuring month and day are in two digits format
+    const strMonth = month < 10 ? `0${month}` : String(month)
+    const strDay = day < 10 ? `0${day}` : String(day)
+    const strHours = hours < 10 ? `0${hours}` : hours
+    const strMinutes = minutes < 10 ? `0${minutes}` : minutes
+
+    console.log('min date', `${year}-${strMonth}-${strDay}`)
+
+    return `${year}-${strMonth}-${strDay}T${strHours}:${strMinutes}`
   }
 
   return (
@@ -104,6 +126,18 @@ export const Dialog = ({ open, onClose }: Props) => {
                       className="text-sm text-gray-500 appearance-none block w-full bg-white border border-gray-300 rounded-md py-2 px-3 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-rose-500 focus:border-rose-500"
                       rows={2}
                       {...register('description')}
+                    />
+                    {errors.description && (
+                      <ErrorMessage message={errors.description.message} />
+                    )}
+                  </div>
+
+                  <div className="mt-2">
+                    <input
+                      className="text-sm text-gray-500 appearance-none block w-full bg-white border border-gray-300 rounded-md py-2 px-3 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-rose-500 focus:border-rose-500"
+                      type="datetime-local"
+                      min={getFormattedToday()}
+                      {...register('date')}
                     />
                     {errors.description && (
                       <ErrorMessage message={errors.description.message} />

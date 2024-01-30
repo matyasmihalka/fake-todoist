@@ -19,7 +19,9 @@ export const ToDoList = () => {
             <div className="">
               <div className="text-base pb-1">{title}</div>
               <div className="text-xs text-gray-500">{description}</div>
-              <div className="text-xs text-rose-500">{date}</div>
+              <div className="text-xs text-rose-500">
+                {date.split('T')[0]} {date.split('T')[1]}
+              </div>
             </div>
           </li>
         ))}
