@@ -1,11 +1,13 @@
 import { create } from 'zustand'
 import { produce } from 'immer'
+import dayjs from '@/dayjsConfig'
+import { Dayjs } from 'dayjs'
 
 export type ToDo = {
   id: string
   title: string
   description: string
-  date: string
+  date: Dayjs
   checked: boolean
 }
 
@@ -26,7 +28,7 @@ const initialState: State = {
       title: 'My first todo',
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec risus augue.',
-      date: 'Not ready yet',
+      date: dayjs(),
       checked: false,
     },
     {
@@ -34,7 +36,7 @@ const initialState: State = {
       title: 'My second todo',
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec risus augue.',
-      date: 'Not ready yet',
+      date: dayjs(),
       checked: false,
     },
   ],

@@ -3,6 +3,7 @@ import './App.css'
 import { ToDoList } from '@/components/ToDoList'
 import { Dialog } from '@/components/Dialog'
 import { Logo } from './components/Logo'
+import { TzToggle } from './components/TzToggle'
 
 function App() {
   const [isOpen, setIsOpen] = useState(false)
@@ -37,6 +38,7 @@ function App() {
         <section className="flex-1  bg-white p-4 ">
           <div className="flex flex-col content-center h-full flex-wrap ">
             <div className="min-w-128 mt-14 ">
+              <TzToggle />
               <h1 className="font-bold mb-3">Week 3 (1.15 -1.21)</h1>
               <ToDoList />
               <section className="mt-8">

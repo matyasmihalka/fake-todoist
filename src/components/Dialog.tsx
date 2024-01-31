@@ -3,8 +3,9 @@ import { Fragment, useEffect } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { useToDoStore } from '@/store/store'
+import { useToDoStore } from '@/store'
 import { v4 as uuidv4 } from 'uuid'
+import dayjs from 'dayjs'
 
 type Inputs = {
   title: string
@@ -47,7 +48,7 @@ export const Dialog = ({ open, onClose }: Props) => {
       id: uuidv4(),
       title: data.title,
       description: data.description,
-      date: data.date,
+      date: dayjs(data.date, dayjs.tz.guess()),
       checked: false,
     })
     onClose()
