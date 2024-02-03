@@ -44,4 +44,4 @@ jobs:
 
       - name: Deploy to Google Cloud Run
         run: |
-          gcloud run deploy CD-Service --image ${{ env.GAR_LOCATION }} --region ${{ env.REGION }} --platform managed --allow-unauthenticated
+          gcloud run deploy cd-service --image ${{ env.GAR_LOCATION }} --region ${{ env.REGION }} --platform managed --allow-unauthenticated
