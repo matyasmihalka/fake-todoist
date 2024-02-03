@@ -13,7 +13,7 @@ env:
   GAR_LOCATION: europe-central2-docker.pkg.dev/fake-todoist/fake-todoist:latest
   # europe-central2-docker.pkg.dev/fake-todoist/fake-todoist/first-image:latest
 
-job:
+jobs:
   build-push-artifact:
     runs-on: ubuntu-latest
     steps:
