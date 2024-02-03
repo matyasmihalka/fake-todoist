@@ -41,3 +41,7 @@ jobs:
 
       - name: Push image
         run: docker push ${{ env.GAR_LOCATION }}
+
+      - name: Deploy to Google Cloud Run
+        run: |
+          gcloud run deploy CD-Service --image ${{ env.GAR_LOCATION }} --region ${{ env.REGION }} --platform managed --allow-unauthenticated
