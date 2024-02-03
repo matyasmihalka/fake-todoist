@@ -4,6 +4,8 @@ FROM node:latest as build
 # Set the working directory
 WORKDIR /app
 
+ENV HOST 0.0.0.0
+
 # Copy package.json, yarn.lock and other necessary files
 COPY . .
 
@@ -29,8 +31,10 @@ FROM nginx:alpine
 # Copy the build output to replace the default nginx contents
 COPY --from=build /app/dist /usr/share/nginx/html
 
+COPY default.conf /etc/nginx/conf.d/default.conf
+
 # Expose port 80
-EXPOSE 80
+EXPOSE 8080
 
 # Start Nginx and keep it running
 CMD ["nginx", "-g", "daemon off;"]

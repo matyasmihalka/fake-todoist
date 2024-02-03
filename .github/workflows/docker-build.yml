@@ -1,0 +1,43 @@
+name: Build and Push to Artifact Registry
+
+on:
+  push:
+    branches: ['main']
+  # pull_request:
+  #   branches: ['main']
+
+env:
+  PROJECT_ID: medior-app
+  REGION: europe-central2
+  # GAR_LOCATION: northamerica-northeast1-docker.pkg.dev/fake-app-323017/repo-1/
+  GAR_LOCATION: europe-central2-docker.pkg.dev/fake-todoist/fake-todoist:latest
+  # europe-central2-docker.pkg.dev/fake-todoist/fake-todoist/first-image:latest
+
+job:
+  build-push-artifact:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout'
+        uses: 'actions/checkout@v3'
+
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: '${{ secrets.SERVICE_ACCOUNT_KEY }}'
+
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v1'
+
+      - name: 'Use gcloud CLI'
+        run: 'gcloud info'
+
+      - name: 'Docker auth'
+        run: |-
+          gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev --quiet
+
+      - name: Build and Push Docker Image
+        run: |
+          docker build -t ${{ env.GAR_LOCATION }} .
+
+      - name: Push image
+        run: docker push ${{ env.GAR_LOCATION }}
