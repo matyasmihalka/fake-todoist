@@ -1,17 +1,13 @@
-name: Build and Push to Artifact Registry
+name: Build, Push and Deploy to Artifact Registry
 
 on:
   push:
     branches: ['main']
-  # pull_request:
-  #   branches: ['main']
 
 env:
   PROJECT_ID: medior-app
   REGION: europe-central2
-  # GAR_LOCATION: northamerica-northeast1-docker.pkg.dev/fake-app-323017/repo-1/
   GAR_LOCATION: europe-central2-docker.pkg.dev/fake-todoist/fake-todoist/first-image:latest
-  # europe-central2-docker.pkg.dev/fake-todoist/fake-todoist/first-image:latest
 
 jobs:
   build-push-artifact:
@@ -38,9 +34,19 @@ jobs:
       - name: Build and Push Docker Image
         run: |
           docker build -t ${{ env.GAR_LOCATION }} .
+          docker push ${{ env.GAR_LOCATION }}
 
-      - name: Push image
-        run: docker push ${{ env.GAR_LOCATION }}
+  deploy-to-cloud-run:
+    needs: build-push-artifact
+    runs-on: ubuntu-latest
+    steps:
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: '${{ secrets.SERVICE_ACCOUNT_KEY }}'
+
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v1'
 
       - name: Deploy to Google Cloud Run
         run: |
