@@ -5,7 +5,28 @@ on:
     branches: [main]
 
 jobs:
+  lint-and-prettier:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '21.4.0' # Ensure this matches the version you use locally
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Run ESLint
+        run: yarn lint
+
+      - name: Run Prettier Check
+        run: yarn prettier-check
+
   test-and-coverage:
+    needs: lint-and-prettier
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -24,3 +45,9 @@ jobs:
 
       - name: Run coverage
         run: yarn coverage
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-report
+          path: coverage/

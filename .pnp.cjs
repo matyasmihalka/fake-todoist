@@ -40,6 +40,7 @@ const RAW_RUNTIME_STATE =
           ["autoprefixer", "virtual:6b1dae99cf8932be14d19f01d1e48d9a4d3b9f68a6c37a9e9e122b407577003edda3f39102af665371b012b4b524b5ec138c3807cf256f440ec64f9055ff0c2d#npm:10.4.16"],\
           ["dayjs", "npm:1.11.10"],\
           ["eslint", "npm:8.56.0"],\
+          ["eslint-config-prettier", "virtual:6b1dae99cf8932be14d19f01d1e48d9a4d3b9f68a6c37a9e9e122b407577003edda3f39102af665371b012b4b524b5ec138c3807cf256f440ec64f9055ff0c2d#npm:9.1.0"],\
           ["eslint-plugin-react-hooks", "virtual:6b1dae99cf8932be14d19f01d1e48d9a4d3b9f68a6c37a9e9e122b407577003edda3f39102af665371b012b4b524b5ec138c3807cf256f440ec64f9055ff0c2d#npm:4.6.0"],\
           ["eslint-plugin-react-refresh", "virtual:6b1dae99cf8932be14d19f01d1e48d9a4d3b9f68a6c37a9e9e122b407577003edda3f39102af665371b012b4b524b5ec138c3807cf256f440ec64f9055ff0c2d#npm:0.4.5"],\
           ["immer", "npm:10.0.3"],\
@@ -2611,6 +2612,28 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["eslint-config-prettier", [\
+      ["npm:9.1.0", {\
+        "packageLocation": "../../../../.yarn/berry/cache/eslint-config-prettier-npm-9.1.0-0e1fd42d7d-10c0.zip/node_modules/eslint-config-prettier/",\
+        "packageDependencies": [\
+          ["eslint-config-prettier", "npm:9.1.0"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:6b1dae99cf8932be14d19f01d1e48d9a4d3b9f68a6c37a9e9e122b407577003edda3f39102af665371b012b4b524b5ec138c3807cf256f440ec64f9055ff0c2d#npm:9.1.0", {\
+        "packageLocation": "./.yarn/__virtual__/eslint-config-prettier-virtual-9a1266b911/5/.yarn/berry/cache/eslint-config-prettier-npm-9.1.0-0e1fd42d7d-10c0.zip/node_modules/eslint-config-prettier/",\
+        "packageDependencies": [\
+          ["eslint-config-prettier", "virtual:6b1dae99cf8932be14d19f01d1e48d9a4d3b9f68a6c37a9e9e122b407577003edda3f39102af665371b012b4b524b5ec138c3807cf256f440ec64f9055ff0c2d#npm:9.1.0"],\
+          ["@types/eslint", null],\
+          ["eslint", "npm:8.56.0"]\
+        ],\
+        "packagePeers": [\
+          "@types/eslint",\
+          "eslint"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["eslint-plugin-react-hooks", [\
       ["npm:4.6.0", {\
         "packageLocation": "../../../../.yarn/berry/cache/eslint-plugin-react-hooks-npm-4.6.0-b429fac07f-10c0.zip/node_modules/eslint-plugin-react-hooks/",\
@@ -3988,6 +4011,7 @@ const RAW_RUNTIME_STATE =
           ["autoprefixer", "virtual:6b1dae99cf8932be14d19f01d1e48d9a4d3b9f68a6c37a9e9e122b407577003edda3f39102af665371b012b4b524b5ec138c3807cf256f440ec64f9055ff0c2d#npm:10.4.16"],\
           ["dayjs", "npm:1.11.10"],\
           ["eslint", "npm:8.56.0"],\
+          ["eslint-config-prettier", "virtual:6b1dae99cf8932be14d19f01d1e48d9a4d3b9f68a6c37a9e9e122b407577003edda3f39102af665371b012b4b524b5ec138c3807cf256f440ec64f9055ff0c2d#npm:9.1.0"],\
           ["eslint-plugin-react-hooks", "virtual:6b1dae99cf8932be14d19f01d1e48d9a4d3b9f68a6c37a9e9e122b407577003edda3f39102af665371b012b4b524b5ec138c3807cf256f440ec64f9055ff0c2d#npm:4.6.0"],\
           ["eslint-plugin-react-refresh", "virtual:6b1dae99cf8932be14d19f01d1e48d9a4d3b9f68a6c37a9e9e122b407577003edda3f39102af665371b012b4b524b5ec138c3807cf256f440ec64f9055ff0c2d#npm:0.4.5"],\
           ["immer", "npm:10.0.3"],\

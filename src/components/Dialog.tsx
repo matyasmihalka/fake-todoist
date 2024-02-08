@@ -40,7 +40,7 @@ export const Dialog = ({ open, onClose }: Props) => {
     if (open) {
       reset()
     }
-  }, [open])
+  }, [open, reset])
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     console.log('data: ', data)
