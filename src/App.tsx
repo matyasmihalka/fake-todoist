@@ -39,7 +39,7 @@ function App() {
           <div className="flex flex-col content-center h-full flex-wrap ">
             <div className="min-w-128 mt-14 ">
               <TzToggle />
-              <h1 className="font-bold mb-3">Week 3 (1.15 -1.21)</h1>
+              <h1 className="font-bold mb-3">Week 6 (2.5 - 2.9)</h1>
               <ToDoList />
               <section className="mt-8">
                 <h2>Done</h2>
