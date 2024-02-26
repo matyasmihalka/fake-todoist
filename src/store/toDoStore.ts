@@ -18,6 +18,7 @@ type State = {
 type Action = {
   addToDo: (toDo: ToDo) => void
   checkToDo: (id: string) => void
+  updateToDo: (toDo: ToDo) => void
   // removeToDo: (toDo: ToDo) => void
 }
 
@@ -44,7 +45,6 @@ const initialState: State = {
 
 export const useToDoStore = create<State & Action>((set) => ({
   ...initialState,
-  // addToDo: (toDo) => set((state) => ({ toDoList: [...state.toDoList, toDo] })),
   addToDo: (toDo) =>
     set(
       produce<State>((state) => {
@@ -57,6 +57,19 @@ export const useToDoStore = create<State & Action>((set) => ({
         const toDo = state.toDoList.find((item) => item.id === id)
         if (toDo) {
           toDo.checked = !toDo.checked
+        } else {
+          throw new Error('ToDo not found')
+        }
+      }),
+    ),
+  updateToDo: (itemToUpdate: ToDo) =>
+    set(
+      produce<State>((state) => {
+        const toDo = state.toDoList.find((item) => item.id === itemToUpdate.id)
+        if (toDo) {
+          toDo.title = itemToUpdate.title
+          toDo.description = itemToUpdate.description
+          toDo.date = itemToUpdate.date
         } else {
           throw new Error('ToDo not found')
         }

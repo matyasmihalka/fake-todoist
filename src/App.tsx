@@ -4,12 +4,21 @@ import { ToDoList } from '@/components/ToDoList'
 import { Dialog } from '@/components/Dialog'
 import { Logo } from './components/Logo'
 import { TzToggle } from './components/TzToggle'
+import { ToDo } from './store/toDoStore'
 
 function App() {
   const [isOpen, setIsOpen] = useState(false)
+  const [toDoToEdit, setToDoToEdit] = useState<ToDo | null>(null)
+
+  const openModalWithToDo = (toDo: ToDo) => {
+    console.log('openModalWithToDo: ', toDo)
+    setToDoToEdit(toDo)
+    setIsOpen(true)
+  }
 
   const closeModal = () => {
     setIsOpen(false)
+    setToDoToEdit(null)
   }
 
   return (
@@ -31,7 +40,7 @@ function App() {
           >
             + Add task
           </button>
-          <Dialog open={isOpen} onClose={closeModal} />
+          <Dialog open={isOpen} onClose={closeModal} toDo={toDoToEdit} />
         </aside>
 
         {/* Main content */}
@@ -39,8 +48,8 @@ function App() {
           <div className="flex flex-col content-center h-full flex-wrap ">
             <div className="min-w-128 mt-14 ">
               <TzToggle />
-              <h1 className="font-bold mb-3">Week 6 (2.5 - 2.9)</h1>
-              <ToDoList />
+              <h1 className="font-bold mb-3">Week 8 (2.26 - 1.3)</h1>
+              <ToDoList openModal={openModalWithToDo} />
               <section className="mt-8">
                 <h2>Done</h2>
               </section>

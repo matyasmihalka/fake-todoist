@@ -6,6 +6,7 @@ import { z } from 'zod'
 import { useToDoStore } from '@/store'
 import { v4 as uuidv4 } from 'uuid'
 import dayjs from 'dayjs'
+import { ToDo } from '@/store/toDoStore'
 
 type Inputs = {
   title: string
@@ -16,6 +17,7 @@ type Inputs = {
 type Props = {
   open: boolean
   onClose: () => void
+  toDo: ToDo | null
 }
 
 const schema = z.object({
@@ -26,8 +28,9 @@ const schema = z.object({
   date: z.string(),
 })
 
-export const Dialog = ({ open, onClose }: Props) => {
+export const Dialog = ({ open, onClose, toDo }: Props) => {
   const addTodo = useToDoStore((state) => state.addToDo)
+  const updateToDo = useToDoStore((state) => state.updateToDo)
 
   const {
     register,
@@ -37,25 +40,46 @@ export const Dialog = ({ open, onClose }: Props) => {
   } = useForm<Inputs>({ resolver: zodResolver(schema) })
 
   useEffect(() => {
-    if (open) {
-      reset()
+    if (open && toDo) {
+      const initialValues = {
+        title: toDo.title,
+        description: toDo.description,
+        // Ensure the date is in the format expected by the datetime-local input
+        // Assuming toDo.date is a Dayjs object, format it to a suitable string
+        date: toDo.date.format('YYYY-MM-DDTHH:mm'),
+      }
+      reset(initialValues) // Reset form with initialValues when dialog opens or toDo changes
+    } else if (open) {
+      console.log('useEffect without: ', toDo)
+      reset({ title: '', description: '', date: '' }) // Reset form without initialValues if toDo is not provided
     }
-  }, [open, reset])
+  }, [open, toDo, reset])
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log('data: ', data)
-    addTodo({
-      id: uuidv4(),
-      title: data.title,
-      description: data.description,
-      date: dayjs(data.date, dayjs.tz.guess()),
-      checked: false,
-    })
+    if (toDo) {
+      updateToDo({
+        id: toDo.id,
+        title: data.title,
+        description: data.description,
+        date: dayjs(data.date, dayjs.tz.guess()),
+        checked: toDo.checked,
+      })
+    } else {
+      addTodo({
+        id: uuidv4(),
+        title: data.title,
+        description: data.description,
+        date: dayjs(data.date, dayjs.tz.guess()),
+        checked: false,
+      })
+    }
+
     onClose()
   }
 
   const closeDialog = () => {
     onClose()
+    reset({ title: '', description: '', date: '' })
   }
 
   const getFormattedToday = () => {
@@ -71,8 +95,6 @@ export const Dialog = ({ open, onClose }: Props) => {
     const strDay = day < 10 ? `0${day}` : String(day)
     const strHours = hours < 10 ? `0${hours}` : hours
     const strMinutes = minutes < 10 ? `0${minutes}` : minutes
-
-    console.log('min date', `${year}-${strMonth}-${strDay}`)
 
     return `${year}-${strMonth}-${strDay}T${strHours}:${strMinutes}`
   }
